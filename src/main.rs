@@ -1,7 +1,7 @@
 use std::char;
 
 fn day_1_problem_1(lines: Vec<&str>) -> u32 {
-    println!("{:#?}", lines);
+    // println!("{:#?}", lines);
     lines
         .iter()
         .map(|line: &&str| {
@@ -16,8 +16,14 @@ fn day_1_problem_1(lines: Vec<&str>) -> u32 {
                 .iter()
                 .rev()
                 .enumerate()
-                .map(|(i, n)| 10 ^ (i as u32) * n)
+                .map(|(i, n)| {
+                    println!("{:#?}", (i, n));
+                    println!("{:#?}", (10 as u32).pow(i as u32) * n);
+
+                    (10 as u32).pow(i as u32) * n
+                })
                 .sum();
+            println!("{:#?}", line_total);
             line_total
         })
         .sum()
