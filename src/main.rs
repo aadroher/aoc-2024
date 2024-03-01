@@ -11,20 +11,9 @@ fn day_1_problem_1(lines: Vec<&str>) -> u32 {
                 .filter(|char: &char| char.is_ascii_digit())
                 .map(|char: char| char.to_digit(10).unwrap())
                 .collect();
-
-            let line_total: u32 = digits
-                .iter()
-                .rev()
-                .enumerate()
-                .map(|(i, n)| {
-                    println!("{:#?}", (i, n));
-                    println!("{:#?}", (10 as u32).pow(i as u32) * n);
-
-                    (10 as u32).pow(i as u32) * n
-                })
-                .sum();
-            println!("{:#?}", line_total);
-            line_total
+            let first_digit = digits.first().expect("Could not find first digit.");
+            let last_digit = digits.last().expect("Could not find last digit.");
+            first_digit * 10 + last_digit
         })
         .sum()
 }
