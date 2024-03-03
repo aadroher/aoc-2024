@@ -20,16 +20,51 @@ fn day_1_problem_1(lines: Vec<String>) -> u32 {
         .sum()
 }
 
+fn day_1_problem_2(lines: Vec<String>) -> u32 {
+    lines
+        .iter()
+        .map(|line| {
+            let chars = line.chars();
+            let digits: Vec<u32> = chars
+                .filter(|char: &char| char.is_ascii_digit())
+                .map(|char: char| char.to_digit(10).unwrap())
+                .collect();
+            let first_digit = digits.first().expect("Could not find first digit.");
+            let last_digit = digits.last().expect("Could not find last digit.");
+            first_digit * 10 + last_digit
+        })
+        .sum()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
-    fn example() {
+    fn day_1_problem_1_example_test() {
         let input: Vec<String> = vec!["1abc2", "pqr3stu8vwx", "a1b2c3d4e5f", "treb7uchet"]
             .iter()
             .map(|&line| line.to_string())
             .collect();
+        let expected: u32 = 142;
+        let output = day_1_problem_1(input);
+        assert!(output == expected);
+    }
+
+    #[test]
+    fn day_1_problem_2_example_test() {
+        let input: Vec<String> = vec![
+            "two1nine",
+            "eightwothree",
+            "abcone2threexyz",
+            "xtwone3four",
+            "4nineeightseven2",
+            "zoneight234",
+            "7pqrstsixteen",
+        ]
+        .iter()
+        .map(|&line| line.to_string())
+        .collect();
         let expected: u32 = 142;
         let output = day_1_problem_1(input);
         assert!(output == expected);
