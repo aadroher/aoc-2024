@@ -1,7 +1,8 @@
-use std::char;
+use regex::Regex;
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
+use std::{char, string};
 
 fn day_1_problem_1(lines: Vec<String>) -> u32 {
     // println!("{:#?}", lines);
@@ -20,17 +21,41 @@ fn day_1_problem_1(lines: Vec<String>) -> u32 {
         .sum()
 }
 
+fn parse_digit(string: &str) -> u32 {
+    match string {
+        "one" => 1,
+        "two" => 2,
+        "three" => 3,
+        "four" => 4,
+        "five" => 5,
+        "six" => 6,
+        "seven" => 7,
+        "eight" => 8,
+        "nine" => 9,
+        _ => string.parse().unwrap(),
+    }
+}
+
 fn day_1_problem_2(lines: Vec<String>) -> u32 {
+    let pattern = r"[0-9]|one|two|three|four|five|six|seven|eight|nine";
     lines
         .iter()
         .map(|line| {
-            let chars = line.chars();
-            let digits: Vec<u32> = chars
-                .filter(|char: &char| char.is_ascii_digit())
-                .map(|char: char| char.to_digit(10).unwrap())
-                .collect();
-            let first_digit = digits.first().expect("Could not find first digit.");
-            let last_digit = digits.last().expect("Could not find last digit.");
+            let re = Regex::new(pattern).unwrap();
+            let first_digit_string = re
+                .find(&line)
+                .expect("Could not find first digit string.")
+                .as_str();
+            let last_digit_string = re
+                .find_iter(line)
+                .last()
+                .expect("Could not find last digit string.")
+                .as_str();
+            println!("{:#?}", first_digit_string);
+            println!("{:#?}", last_digit_string);
+            let first_digit = parse_digit(first_digit_string);
+            let last_digit = parse_digit(last_digit_string);
+
             first_digit * 10 + last_digit
         })
         .sum()
@@ -65,8 +90,8 @@ mod tests {
         .iter()
         .map(|&line| line.to_string())
         .collect();
-        let expected: u32 = 142;
-        let output = day_1_problem_1(input);
+        let expected: u32 = 281;
+        let output = day_1_problem_2(input);
         assert!(output == expected);
     }
 }
