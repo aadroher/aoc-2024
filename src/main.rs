@@ -1,8 +1,8 @@
 use regex::Regex;
+use std::char;
 use std::fs::File;
 use std::io::{self, BufRead};
 use std::path::Path;
-use std::{char, string};
 
 fn day_1_problem_1(lines: Vec<String>) -> u32 {
     // println!("{:#?}", lines);
@@ -21,8 +21,8 @@ fn day_1_problem_1(lines: Vec<String>) -> u32 {
         .sum()
 }
 
-fn parse_digit(string: &str) -> u32 {
-    match string {
+fn parse_digit(digit_string: &str) -> u32 {
+    match digit_string {
         "one" => 1,
         "two" => 2,
         "three" => 3,
@@ -32,7 +32,7 @@ fn parse_digit(string: &str) -> u32 {
         "seven" => 7,
         "eight" => 8,
         "nine" => 9,
-        _ => string.parse().unwrap(),
+        _ => digit_string.parse().unwrap(),
     }
 }
 
@@ -51,8 +51,8 @@ fn day_1_problem_2(lines: Vec<String>) -> u32 {
                 .last()
                 .expect("Could not find last digit string.")
                 .as_str();
-            println!("{:#?}", first_digit_string);
-            println!("{:#?}", last_digit_string);
+            // println!("{:#?}", first_digit_string);
+            // println!("{:#?}", last_digit_string);
             let first_digit = parse_digit(first_digit_string);
             let last_digit = parse_digit(last_digit_string);
 
@@ -116,5 +116,10 @@ fn main() {
     println!(
         "{:#?}",
         day_1_problem_1(load_lines("./data/day_1/problem_1/input.txt"))
-    )
+    );
+    println!("Day 1 Problem 2");
+    println!(
+        "{:#?}",
+        day_1_problem_2(load_lines("./data/day_1/problem_1/input.txt"))
+    );
 }
