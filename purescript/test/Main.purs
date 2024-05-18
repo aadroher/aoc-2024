@@ -1,11 +1,12 @@
 module Test.Main where
 
-import Prelude
+import Prelude hiding (flip)
 
 import Effect (Effect)
 import Effect.Class.Console (log)
 
+import Main (flip)
+
 main :: Effect Unit
 main = do
-  log "🍝"
-  log "You should add some tests."
+  log (show (flip const 1 2))
