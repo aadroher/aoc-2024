@@ -7,7 +7,7 @@ settings:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
       purescript:
         specifier: ^0.15.15
         version: 0.15.15

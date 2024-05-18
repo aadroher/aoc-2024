@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "purescript": "^0.15.15",
     "spago": "^0.21.0"
   }
