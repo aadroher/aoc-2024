@@ -5,12 +5,13 @@ import Prelude
 import Effect (Effect)
 import Effect.Console (log)
 
-const :: forall a b. a -> b -> a
-const a _ = a
+pow :: Int -> Int -> Int
+pow _ 0 = 1 
+pow n m = n * pow n (m - 1)
 
-flip :: forall a b c. (a -> b -> c) -> b -> a -> c
-flip f b a = f a b
-
+pow' :: Int -> Int -> Int
+pow' _ 0 = 1
+pow' n m = pow' n (m - 1) * n
 main :: Effect Unit
 main = do
   log "🍝"

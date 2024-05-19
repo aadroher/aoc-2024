@@ -4,9 +4,9 @@ import Prelude hiding (flip, const)
 
 import Effect (Effect)
 import Effect.Class.Console (log)
-
-import Main (flip, const)
+import Main (pow)
 
 main :: Effect Unit
 main = do
-  log $ show $ flip const 1 2
+  log "Hello, World!"
+  log $ show $ pow 2 2147483647
